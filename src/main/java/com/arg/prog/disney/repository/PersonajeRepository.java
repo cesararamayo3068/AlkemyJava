@@ -8,5 +8,7 @@ import com.arg.prog.disney.models.Personaje;
 public interface PersonajeRepository extends CrudRepository<Personaje, Long> {
 	
 	Personaje findByNombre(@Param("nombre") String nombre);
+	
+	Personaje findByEdad(@Param("edad") int edad);
 
 }

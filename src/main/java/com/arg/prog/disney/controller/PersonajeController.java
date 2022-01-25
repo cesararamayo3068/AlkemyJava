@@ -25,10 +25,10 @@ import com.arg.prog.disney.repository.PersonajeRepository;
 
 @RestController
 public class PersonajeController {
-	
+
 	@Autowired
 	PersonajeRepository personajeRepository;
-	
+
 	@Autowired
 	private PersonajeDao personajeDao;
 
@@ -97,16 +97,29 @@ public class PersonajeController {
 		}
 	}
 
-	//Buscar Personaje por Nombre
+	// Buscar Personaje por Nombre
 	@RequestMapping(value = "/personaje/{nombre}")
 	public ResponseEntity<Personaje> findByNombre(@PathVariable("nombre") String nombre) {
-	    Personaje personaje = personajeRepository.findByNombre(nombre);
+		Personaje personaje = personajeRepository.findByNombre(nombre);
 
-   if(personaje == null){
-	   ResponseEntity.status(HttpStatus.BAD_REQUEST).body(personaje);
-    }
+		if (personaje == null) {
+			ResponseEntity.status(HttpStatus.BAD_REQUEST).body(personaje);
+		}
 
-	    
-	    return ResponseEntity.status(HttpStatus.OK).body(personaje);
+		return ResponseEntity.status(HttpStatus.OK).body(personaje);
+
 	}
+	
+	// Buscar Personaje por Edad
+		@RequestMapping(value = "/personajes/{edad}")
+		public ResponseEntity<Personaje> findByNombre(@PathVariable("edad") int edad) {
+			Personaje personaje = personajeRepository.findByEdad(edad);
+
+			if (personaje == null) {
+				ResponseEntity.status(HttpStatus.BAD_REQUEST).body(personaje);
+			}
+
+			return ResponseEntity.status(HttpStatus.OK).body(personaje);
+
+		}
 }
