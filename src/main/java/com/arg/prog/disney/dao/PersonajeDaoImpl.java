@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +16,10 @@ import com.arg.prog.disney.models.Personaje;
 @Repository
 @Transactional
 public class PersonajeDaoImpl implements PersonajeDao {
-
+	@Lazy
+	@Autowired
+     PersonajeDao personajeDao;
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 
@@ -25,6 +30,7 @@ public class PersonajeDaoImpl implements PersonajeDao {
 		 
 		return entityManager.createQuery(query).getResultList();
 	}
+
 
 	
 	
